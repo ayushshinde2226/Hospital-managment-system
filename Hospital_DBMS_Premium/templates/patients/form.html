@@ -1,0 +1,17 @@
+{% extends "base.html" %}{% block title %}{{'Edit' if patient else 'Register'}} Patient{% endblock %}
+{% block content %}<div class="page-head"><div><span class="eyebrow">PATIENT REGISTRY</span><h1>{{'Edit' if patient else 'Register'}} Patient</h1><p class="muted">Capture core demographic and clinical information.</p></div></div>
+<form method="post" class="panel form-panel"><div class="section-title">Identity</div><div class="row g-3">
+<div class="col-md-6"><label>Full name *</label><input required class="form-control" name="name" value="{{patient.name if patient else ''}}"></div>
+<div class="col-md-3"><label>Date of birth</label><input class="form-control" type="date" name="dob" value="{{patient.dob if patient else ''}}"></div>
+<div class="col-md-3"><label>Age *</label><input required class="form-control" type="number" min="0" name="age" value="{{patient.age if patient else ''}}"></div>
+<div class="col-md-3"><label>Gender *</label><select required class="form-select" name="gender">{% for x in ['Male','Female','Other'] %}<option {% if patient and patient.gender==x %}selected{% endif %}>{{x}}</option>{% endfor %}</select></div>
+<div class="col-md-3"><label>Blood group</label><select class="form-select" name="blood_group"><option></option>{% for x in ['A+','A-','B+','B-','AB+','AB-','O+','O-'] %}<option {% if patient and patient.blood_group==x %}selected{% endif %}>{{x}}</option>{% endfor %}</select></div>
+<div class="col-md-3"><label>Phone</label><input class="form-control" name="phone" value="{{patient.phone if patient else ''}}"></div>
+<div class="col-md-3"><label>Email</label><input class="form-control" type="email" name="email" value="{{patient.email if patient else ''}}"></div>
+<div class="col-md-6"><label>Address</label><input class="form-control" name="address" value="{{patient.address if patient else ''}}"></div>
+<div class="col-md-3"><label>Emergency contact</label><input class="form-control" name="emergency_contact" value="{{patient.emergency_contact if patient else ''}}"></div>
+<div class="col-md-3"><label>Insurance provider</label><input class="form-control" name="insurance_provider" value="{{patient.insurance_provider if patient else ''}}"></div>
+<div class="col-md-6"><label>Allergies</label><input class="form-control" name="allergies" placeholder="e.g. Penicillin" value="{{patient.allergies if patient else ''}}"></div>
+<div class="col-md-6"><label>Primary doctor</label><select class="form-select" name="primary_doctor_id"><option value="">Not assigned</option>{% for d in doctors %}<option value="{{d.doctor_id}}" {% if patient and patient.primary_doctor_id==d.doctor_id %}selected{% endif %}>{{d.name}} — {{d.specialization}}</option>{% endfor %}</select></div>
+<div class="col-md-3"><label>Status</label><select class="form-select" name="status"><option {% if not patient or patient.status=='Active'%}selected{%endif%}>Active</option><option {% if patient and patient.status=='Inactive'%}selected{%endif%}>Inactive</option></select></div>
+</div><div class="mt-4"><button class="btn btn-primary">Save Patient</button><a class="btn btn-light border ms-2" href="{{url_for('patients')}}">Cancel</a></div></form>{% endblock %}

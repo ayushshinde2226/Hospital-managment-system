@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}New Prescription{% endblock %}
+{% block content %}<div class="page-head"><div><span class="eyebrow">PHARMACY</span><h1>New Prescription</h1></div></div>
+<form method="post" class="panel form-panel"><div class="row g-3">
+<div class="col-md-6"><label>Patient *</label><select class="form-select" name="patient_id" required>{% for p in patients %}<option value="{{p.patient_id}}">{{p.patient_code}} — {{p.name}}</option>{% endfor %}</select></div>
+<div class="col-md-6"><label>Doctor *</label><select class="form-select" name="doctor_id" required>{% for d in doctors %}<option value="{{d.doctor_id}}">{{d.name}}</option>{% endfor %}</select></div>
+<div class="col-md-3"><label>Date *</label><input class="form-control" type="date" name="prescription_date" required></div><div class="col-md-9"><label>Diagnosis</label><input class="form-control" name="diagnosis"></div>
+<div class="col-12"><label>Instructions</label><textarea class="form-control" name="instructions" rows="2"></textarea></div>
+<div class="col-12"><div class="section-title mt-2">Medication</div><div class="table-responsive"><table class="table"><tr><th>Medicine</th><th>Dosage</th><th>Days</th><th>Qty</th></tr>
+{% for i in range(1,5) %}<tr><td><select class="form-select" name="medicine_id"><option value="">None</option>{% for m in medicines %}<option value="{{m.medicine_id}}">{{m.name}} (Stock {{m.quantity}})</option>{% endfor %}</select></td><td><input class="form-control" name="dosage" placeholder="1 tab twice daily"></td><td><input class="form-control" type="number" name="duration_days"></td><td><input class="form-control" type="number" name="quantity"></td></tr>{% endfor %}</table></div></div>
+</div><button class="btn btn-primary">Create Prescription</button></form>{% endblock %}

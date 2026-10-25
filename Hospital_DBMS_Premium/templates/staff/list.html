@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% block title %}Staff{% endblock %}
+{% block content %}<div class="page-head"><div><span class="eyebrow">OPERATIONS</span><h1>Staff Directory</h1><p class="muted">Hospital workforce and shifts.</p></div>{% if session.get('role')=='Admin' %}<a class="btn btn-primary" href="{{url_for('add_staff')}}">＋ Add Staff</a>{% endif %}</div>
+<div class="staff-grid">{% for s in staff %}<div class="staff-card"><div class="doctor-avatar">{{s.name[0]}}</div><div><h4>{{s.name}}</h4><p>{{s.designation}}</p><span class="tiny-tag">{{s.department or 'General'}}</span><div class="small muted mt-2">{{s.shift}} shift · {{s.phone or 'No phone'}}</div></div></div>{% else %}<div class="empty">No staff records.</div>{% endfor %}</div>{% endblock %}

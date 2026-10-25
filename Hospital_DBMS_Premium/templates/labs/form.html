@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block title %}Record Lab Test{% endblock %}
+{% block content %}<div class="page-head"><div><span class="eyebrow">DIAGNOSTICS</span><h1>Record Lab Test</h1></div></div>
+<form method="post" class="panel form-panel"><div class="row g-3">
+<div class="col-md-6"><label>Patient *</label><select required class="form-select" name="patient_id">{% for p in patients %}<option value="{{p.patient_id}}">{{p.patient_code}} — {{p.name}}</option>{% endfor %}</select></div>
+<div class="col-md-6"><label>Requesting Doctor</label><select class="form-select" name="doctor_id"><option value="">None</option>{% for d in doctors %}<option value="{{d.doctor_id}}">{{d.name}}</option>{% endfor %}</select></div>
+<div class="col-md-6"><label>Test name *</label><input class="form-control" name="test_name" required></div><div class="col-md-3"><label>Category</label><input class="form-control" name="test_category"></div><div class="col-md-3"><label>Date *</label><input class="form-control" type="date" name="test_date" required></div>
+<div class="col-md-4"><label>Result value</label><input class="form-control" name="result_value"></div><div class="col-md-2"><label>Unit</label><input class="form-control" name="unit"></div><div class="col-md-3"><label>Reference range</label><input class="form-control" name="reference_range"></div>
+<div class="col-md-3"><label>Status</label><select class="form-select" name="result_status">{% for x in ['Pending','Normal','Abnormal','Critical'] %}<option>{{x}}</option>{% endfor %}</select></div>
+<div class="col-12"><label>Remarks</label><textarea class="form-control" name="remarks"></textarea></div>
+</div><button class="btn btn-primary mt-3">Save Lab Test</button></form>{% endblock %}

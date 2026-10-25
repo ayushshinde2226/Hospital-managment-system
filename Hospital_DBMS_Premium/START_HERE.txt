@@ -1,0 +1,23 @@
+MEDICORE HOSPITAL SUITE — PREMIUM SQLITE EDITION
+
+NO MYSQL REQUIRED.
+
+Fastest way:
+1. Extract the ZIP.
+2. Open the folder in VS Code.
+3. Double-click run_project.bat (or run the commands below).
+4. Open http://127.0.0.1:5000
+
+Manual:
+    py -m venv venv
+    venv\Scripts\activate
+    pip install -r requirements.txt
+    python app.py
+
+Demo accounts:
+Admin     admin / admin123
+Staff     staff / staff123
+Pharmacy  pharmacy / pharma123
+
+The small live database `hospital.db` is included.
+The large `performance_demo.db` is an optional DBMS benchmark dataset; the app does not need it.

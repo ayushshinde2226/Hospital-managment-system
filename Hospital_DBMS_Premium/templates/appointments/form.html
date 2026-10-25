@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Book Appointment{% endblock %}
+{% block content %}<div class="page-head"><div><span class="eyebrow">SCHEDULING</span><h1>Book Appointment</h1></div></div>
+<form method="post" class="panel form-panel"><div class="row g-3">
+<div class="col-md-6"><label>Patient *</label><select required class="form-select" name="patient_id"><option value="">Select patient</option>{% for p in patients %}<option value="{{p.patient_id}}">{{p.patient_code}} — {{p.name}}</option>{% endfor %}</select></div>
+<div class="col-md-6"><label>Doctor *</label><select required class="form-select" name="doctor_id"><option value="">Select doctor</option>{% for d in doctors %}<option value="{{d.doctor_id}}">{{d.name}} — {{d.specialization}}</option>{% endfor %}</select></div>
+<div class="col-md-4"><label>Date *</label><input required class="form-control" type="date" name="appointment_date"></div><div class="col-md-4"><label>Time *</label><input required class="form-control" type="time" name="appointment_time"></div>
+<div class="col-md-2"><label>Priority</label><select class="form-select" name="priority"><option>Normal</option><option>High</option><option>Urgent</option></select></div>
+<div class="col-md-12"><label>Reason</label><input class="form-control" name="reason"></div><div class="col-md-12"><label>Notes</label><textarea class="form-control" name="notes" rows="3"></textarea></div>
+</div><div class="mt-4"><button class="btn btn-primary">Book Appointment</button><a class="btn btn-light border ms-2" href="{{url_for('appointments')}}">Cancel</a></div></form>{% endblock %}

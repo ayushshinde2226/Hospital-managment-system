@@ -1,0 +1,29 @@
+MEDICORE HOSPITAL SUITE — ER DIAGRAM (TEXT)
+
+DEPARTMENTS (department_id PK)
+      1
+      |
+      N
+DOCTORS (doctor_id PK, department_id FK)
+      | 1
+      |------------------ N
+      |            APPOINTMENTS (appointment_id PK,
+      |                         patient_id FK, doctor_id FK)
+      |
+      |<-------- primary doctor --------
+      N
+PATIENTS (patient_id PK)
+
+PATIENTS 1 ---- N ADMISSIONS N ---- 1 ROOMS
+PATIENTS 1 ---- N PRESCRIPTIONS N ---- 1 DOCTORS
+PRESCRIPTIONS 1 ---- N PRESCRIPTION_ITEMS N ---- 1 MEDICINES
+PATIENTS 1 ---- N LAB_TESTS N ---- 1 DOCTORS
+PATIENTS 1 ---- N BILLS
+PATIENTS 1 ---- N VITALS
+BLOOD_BANK = inventory by blood group
+BLOOD_DONORS = donor history
+STAFF = hospital workforce
+USERS 1 ---- N AUDIT_LOGS
+
+Primary Key = PK
+Foreign Key = FK

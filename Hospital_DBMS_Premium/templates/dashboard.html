@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="page-head"><div><span class="eyebrow">OVERVIEW</span><h1>Good day, {{session.get('full_name')}} 👋</h1><p class="muted">Here is today's hospital snapshot.</p></div><div class="head-buttons"><a class="btn btn-primary" href="{{url_for('add_patient')}}">＋ Patient</a><a class="btn btn-soft" href="{{url_for('add_appointment')}}">＋ Appointment</a></div></div>
+<div class="stats-grid">
+{% for icon,label,value,kind in [('♙','Active Patients',stats.patients,'blue'),('⚕','Active Doctors',stats.doctors,'violet'),('◷',"Today's Appointments",stats.today_appointments,'orange'),('▤','Admitted Patients',stats.admitted,'green'),('₹','Pending Bills',stats.pending_bills,'red'),('▦','Low Stock Medicines',stats.low_stock,'gold'),('◈','Critical Labs',stats.critical_labs,'purple')] %}
+<div class="stat-card {{kind}}"><div class="stat-icon">{{icon}}</div><div><div class="stat-value">{{value}}</div><div class="stat-label">{{label}}</div></div></div>
+{% endfor %}
+<div class="stat-card navy"><div><div class="stat-label">Paid Revenue</div><div class="stat-value">₹{{"%.0f"|format(stats.revenue)}}</div><small>All recorded paid bills</small></div></div>
+</div>
+<div class="content-grid">
+<div class="panel"><div class="panel-head"><div><h3>Today's Appointments</h3><p>Live schedule</p></div><a href="{{url_for('appointments')}}" class="link">View all →</a></div>
+{% for a in today %}<div class="list-row"><div class="time-badge">{{a.appointment_time[:5]}}</div><div class="row-main"><b>{{a.patient_name}}</b><span>{{a.doctor_name}} · {{a.reason or 'Consultation'}}</span></div><span class="pill {{a.priority|lower}}">{{a.priority}}</span></div>{% else %}<div class="empty">No appointments scheduled for today.</div>{% endfor %}</div>
+<div class="panel"><div class="panel-head"><div><h3>Department Load</h3><p>Doctors by department</p></div><a href="{{url_for('departments')}}" class="link">Departments →</a></div>
+{% for d in dept %}<div class="bar-row"><div><span>{{d.name}}</span><b>{{d.total}}</b></div><div class="bar"><span style="width:{{[d.total*22,100]|min}}%"></span></div></div>{% endfor %}
+</div></div>
+<div class="panel mt-4"><div class="panel-head"><div><h3>Recent Activity</h3><p>Latest records</p></div><a href="{{url_for('patients')}}" class="link">Patient export →</a></div>
+<table class="table table-hover align-middle"><thead><tr><th>Type</th><th>Record</th><th>Date / Time</th></tr></thead><tbody>{% for r in recent %}<tr><td><span class="tiny-tag">{{r.kind}}</span></td><td>{{r.title}}</td><td class="muted">{{r.dt}}</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

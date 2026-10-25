@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Admit Patient{% endblock %}
+{% block content %}<div class="page-head"><div><span class="eyebrow">INPATIENT</span><h1>Admit Patient</h1></div></div>
+<form method="post" class="panel form-panel"><div class="row g-3">
+<div class="col-md-6"><label>Patient *</label><select class="form-select" name="patient_id" required><option value="">Select</option>{% for p in patients %}<option value="{{p.patient_id}}">{{p.patient_code}} — {{p.name}}</option>{% endfor %}</select></div>
+<div class="col-md-6"><label>Attending Doctor</label><select class="form-select" name="attending_doctor_id"><option value="">Select</option>{% for d in doctors %}<option value="{{d.doctor_id}}">{{d.name}}</option>{% endfor %}</select></div>
+<div class="col-md-6"><label>Room *</label><select class="form-select" name="room_id" required>{% for r in rooms %}<option value="{{r.room_id}}">{{r.ward}} · {{r.room_no}} · {{r.room_type}} · {{r.occupied}}/{{r.capacity}} occupied · ₹{{r.daily_charge}}/day</option>{% endfor %}</select></div>
+<div class="col-md-2"><label>Bed</label><input class="form-control" name="bed_no"></div><div class="col-md-2"><label>Admission date *</label><input class="form-control" type="date" name="admission_date" required></div><div class="col-md-2"><label>Expected discharge</label><input class="form-control" type="date" name="expected_discharge"></div>
+<div class="col-md-6"><label>Diagnosis</label><input class="form-control" name="diagnosis"></div><div class="col-md-6"><label>Notes</label><input class="form-control" name="notes"></div>
+</div><div class="mt-4"><button class="btn btn-primary">Admit Patient</button><a class="btn btn-light border ms-2" href="{{url_for('admissions')}}">Cancel</a></div></form>{% endblock %}

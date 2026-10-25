@@ -1,0 +1,2 @@
+{% extends "base.html" %}{% block title %}Departments{% endblock %}
+{% block content %}<div class="page-head"><div><span class="eyebrow">ORGANIZATION</span><h1>Departments</h1><p class="muted">Clinical and operational structure.</p></div></div><div class="dept-grid">{% for d in departments %}<div class="dept-card"><div class="dept-icon">⌘</div><h3>{{d.name}}</h3><div class="muted">Floor {{d.floor}} · {{d.phone}}</div><div class="dept-stat">{{d.doctor_count}} <small>doctors</small></div><small>Head: {{d.head_name or '—'}}</small></div>{% endfor %}</div>{% endblock %}

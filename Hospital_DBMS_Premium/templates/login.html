@@ -1,0 +1,8 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MediCore Login</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"><link rel="stylesheet" href="{{url_for('static',filename='style.css')}}"></head>
+<body class="login-bg"><div class="login-wrap"><div class="login-hero"><div class="hero-badge">✚ MEDICORE</div><h1>Hospital Management,<br><span>beautifully organized.</span></h1><p>Premium academic DBMS project with patient care, operations, pharmacy, laboratory, billing and analytics.</p>
+<div class="hero-grid"><div>✓ Relational database</div><div>✓ Role-based access</div><div>✓ Clinical history</div><div>✓ Reports & audit logs</div></div></div>
+<div class="login-card"><div class="brand big"><div class="brand-mark">✚</div><div><div class="brand-name">MediCore</div><small>Hospital Suite</small></div></div><h3>Sign in</h3><p class="muted">Use a demo account to continue.</p>
+{% with msgs=get_flashed_messages(with_categories=true) %}{% for cat,msg in msgs %}<div class="alert alert-{{cat}}">{{msg}}</div>{% endfor %}{% endwith %}
+<form method="post"><label>Username</label><input class="form-control" name="username" autofocus required><label class="mt-3">Password</label><input class="form-control" name="password" type="password" required><button class="btn btn-primary w-100 mt-4">Enter Dashboard →</button></form>
+<div class="demo-accounts mt-4"><b>Demo accounts</b><br>Admin: <code>admin / admin123</code><br>Staff: <code>staff / staff123</code><br>Pharmacy: <code>pharmacy / pharma123</code></div></div></div></body></html>

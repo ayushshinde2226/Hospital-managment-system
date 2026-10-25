@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}{{'Edit' if doctor else 'Add'}} Doctor{% endblock %}
+{% block content %}<div class="page-head"><div><span class="eyebrow">CLINICAL TEAM</span><h1>{{'Edit' if doctor else 'Add'}} Doctor</h1></div></div>
+<form method="post" class="panel form-panel"><div class="row g-3">
+<div class="col-md-6"><label>Name *</label><input required class="form-control" name="name" value="{{doctor.name if doctor else ''}}"></div>
+<div class="col-md-6"><label>Specialization</label><input class="form-control" name="specialization" value="{{doctor.specialization if doctor else ''}}"></div>
+<div class="col-md-4"><label>Department</label><select class="form-select" name="department_id"><option value="">Select</option>{% for d in departments %}<option value="{{d.department_id}}" {% if doctor and doctor.department_id==d.department_id%}selected{%endif%}>{{d.name}}</option>{% endfor %}</select></div>
+<div class="col-md-4"><label>License No.</label><input class="form-control" name="license_no" value="{{doctor.license_no if doctor else ''}}"></div>
+<div class="col-md-4"><label>Consultation fee</label><input class="form-control" type="number" step=".01" name="consultation_fee" value="{{doctor.consultation_fee if doctor else 0}}"></div>
+<div class="col-md-4"><label>Phone</label><input class="form-control" name="phone" value="{{doctor.phone if doctor else ''}}"></div>
+<div class="col-md-4"><label>Email</label><input class="form-control" name="email" value="{{doctor.email if doctor else ''}}"></div>
+<div class="col-md-4"><label>Available days</label><input class="form-control" name="available_days" value="{{doctor.available_days if doctor else ''}}"></div>
+<div class="col-md-6"><label>Available time</label><input class="form-control" name="available_time" value="{{doctor.available_time if doctor else ''}}"></div>
+<div class="col-md-3"><label>Status</label><select class="form-select" name="status"><option>Active</option><option {% if doctor and doctor.status=='Inactive'%}selected{%endif%}>Inactive</option></select></div>
+</div><div class="mt-4"><button class="btn btn-primary">Save</button><a class="btn btn-light border ms-2" href="{{url_for('doctors')}}">Cancel</a></div></form>{% endblock %}
